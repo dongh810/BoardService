@@ -30,8 +30,14 @@ public class BoardService {
         System.out.println("슬프게도 우리 게시판은 아직 글이 없습니다.");
     }
 
-    public void searchContent() {
-        br.searchContent();
-        System.out.println("내용검색 기능!");
+    public void searchContent(String input) {
+        ArrayList<Board> searchingContent = br.searchContent(input);
+
+        /* 설명. 회원이 한명도 없어서 조회 결과가 없더라도 ArrayList객체는 넘어온다.(Empty상태로) */
+        if(!searchingContent.isEmpty()) {        // 회원이 한명이라도 조회 된다면
+            for(Board b: searchingContent) {
+                System.out.println(b);
+            }
+        } else System.out.println("검색된 데이터가 없습니다.");
     }
 }

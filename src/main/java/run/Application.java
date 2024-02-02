@@ -25,21 +25,30 @@ public class Application {
                     System.out.println("1. 전체");
                     System.out.println("2. 카테고리");
                     System.out.println("3. 내용");
+                    System.out.println("9. 뒤로가기");
                     System.out.print("조회할 분류를 선택해 주세요: ");
                     int input1 = sc.nextInt();
                     switch (input1){
                         case 1:
-                            // 서비스
+                            bs.selectAllBoards();
                             break;
                         case 2:
                             //서비스
                             break;
                         case 3:
-                            bs.searchContent();
+                            System.out.print("검색할 내용을 입력해주세요: ");
+                            sc.nextLine();
+                            String searchInput = sc.nextLine();
+                            while(true){
+                                if(searchInput != null) {
+                                    bs.searchContent(searchInput);
+                                    break;
+                                } else break;
+                            }
+
                             break;
                         case 9:
-                            System.out.println("뒤로가기");
-                            return;
+                            break;
                         default:
                             System.out.println("번호를 제대로 다시 입력해 주세요");
                     }

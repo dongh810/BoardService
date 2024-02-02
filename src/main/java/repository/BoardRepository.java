@@ -146,7 +146,13 @@ public class BoardRepository {
         return 0;
     }
 
-    public void searchContent() {
-        System.out.println("리포를 통해 디비에서 내용검색해서 꺼내오기");
+    public ArrayList<Board> searchContent(String input) {
+         ArrayList<Board> searchingContent = new ArrayList<>();
+         for(int i=0; i<boardList.size();i++){
+             if(boardList.get(i).getContent().contains(input)) {
+                 searchingContent.add(boardList.get(i));
+             }
+         }
+         return searchingContent;
     }
 }
