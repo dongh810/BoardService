@@ -45,4 +45,16 @@ public class Board implements Serializable {
         this.title = title;
         this.categoryType = categoryType;
     }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "boardNo=" + boardNo +
+                ", id='" + id + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", title='" + title + '\'' +
+                ", categoryType=" + categoryType +
+                '}';
+    }
 }
