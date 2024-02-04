@@ -65,9 +65,12 @@ public class Application {
                 case 3:
                     bs.deleteBoard(chooseBoardNo(), chooseMember(), deleteYN());
                     break;
-//                case 4:
-//                    bs.deleteMember(chooseMemberNo());
-//                    break;
+                case 4:
+                    System.out.print("수정할 게시글의 번호입력 : ");
+                    int boardNo = sc.nextInt();
+                    sc.nextLine();
+                    bs.updateBoard(boardNo);
+                    break;
                 case 9:
                     System.out.println("프로그램을 종료합니다.");
                     return;

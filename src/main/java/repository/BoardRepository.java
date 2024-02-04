@@ -7,6 +7,7 @@ import stream.MyObjectOutput;
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BoardRepository {
 
@@ -153,5 +154,24 @@ public class BoardRepository {
             }
         }
         return searchingContent;
+    }
+
+    public void updateBoard(int boardNo) {
+        for (int i = 0; i < boardList.size(); i++) {
+            Board b = boardList.get(i);
+            if (b.getBoardNo() == boardNo) {
+                Scanner sc = new Scanner(System.in);
+                System.out.print("수정할 타이틀 입력 : ");
+                String title = sc.nextLine();
+                System.out.print("수정할 내용 입력 : ");
+                String content = sc.nextLine();
+                Board updatedBoard = new Board(b.getBoardNo(),b.getId(),content,"2024.02.02",title,b.getCategoryType());
+                boardList.set(i, updatedBoard);
+                System.out.println("회원 정보가 업데이트 되었습니다.");
+                saveBoards(boardList);
+                return;
+            }
+        }
+        System.out.println("해당 번호의 회원을 찾을 수 없습니다.");
     }
 }

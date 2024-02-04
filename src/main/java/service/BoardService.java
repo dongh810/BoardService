@@ -92,4 +92,7 @@ public class BoardService {
         System.out.println("카테고리: " + board.getCategoryType());
         System.out.println("-----------------------------");
     }
+    public void updateBoard(int boardNo){
+        br.updateBoard(boardNo);
+    }
 }
