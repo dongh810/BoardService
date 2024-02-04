@@ -17,9 +17,9 @@ public class BoardService {
         ArrayList<Board> selectedBoards = br.selectAllBoard();
 
         /* 설명. 회원이 한명도 없어서 조회 결과가 없더라도 ArrayList객체는 넘어온다.(Empty상태로) */
-        if(!selectedBoards.isEmpty()) {        // 회원이 한명이라도 조회 된다면
+        if (!selectedBoards.isEmpty()) {        // 회원이 한명이라도 조회 된다면
             System.out.println("==== service까지 잘 반환되어 오나 확인 ====");
-            for(Board b: selectedBoards) {
+            for (Board b : selectedBoards) {
                 System.out.println(b);
             }
 
@@ -34,10 +34,19 @@ public class BoardService {
         ArrayList<Board> searchingContent = br.searchContent(input);
 
         /* 설명. 회원이 한명도 없어서 조회 결과가 없더라도 ArrayList객체는 넘어온다.(Empty상태로) */
-        if(!searchingContent.isEmpty()) {        // 회원이 한명이라도 조회 된다면
-            for(Board b: searchingContent) {
+        if (!searchingContent.isEmpty()) {        // 회원이 한명이라도 조회 된다면
+            for (Board b : searchingContent) {
                 System.out.println(b);
             }
         } else System.out.println("검색된 데이터가 없습니다.");
+    }
+
+    public void deleteBoard(int boardNo, String Member, String YN) {
+        int result = br.deleteBoard(boardNo, Member, YN);
+        if (result > 0) {
+            System.out.println(boardNo + "번 게시물 삭제를 성공하였습니다.");
+            return;
+        }
+        System.out.println("게시물 삭제에 실패하였습니다.");
     }
 }

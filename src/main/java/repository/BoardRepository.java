@@ -17,11 +17,10 @@ public class BoardRepository {
 
         /* 설명. 회원가입 기능 추가 후 이제는 파일이 기존에 존재하면(처음이 아니므로) 회원 3명으로 초기화 하기를 하지 않는다. */
         File file = new File("src/main/java/db/boardDB.dat");
-        if(!file.exists()) {
+        if (!file.exists()) {
             ArrayList<Board> boards = new ArrayList<>();
-            boards.add(new Board(1,"dongh","아아아아아아앙ㅇㅇㅇ!!!!!","2024-01-30","이잉!", CategoryType.FREE));
-            boards.add(new Board(2,"dongh","asdf","2024-01-30","dfsf",CategoryType.QNA));
-
+            boards.add(new Board(1, "dongh", "아아아아아아앙ㅇㅇㅇ!!!!!", "2024-01-30", "이잉!", CategoryType.FREE));
+            boards.add(new Board(2, "dongh", "asdf", "2024-01-30", "dfsf", CategoryType.QNA));
             saveBoards(boards);
         }
 
@@ -43,7 +42,7 @@ public class BoardRepository {
                             new FileOutputStream("src/main/java/db/boardDB.dat")));
 
             /* 설명. 넘어온 회원 수만큼 객체 출력하기 */
-            for(Board b: boards) {
+            for (Board b : boards) {
                 oos.writeObject(b);
             }
 
@@ -52,7 +51,7 @@ public class BoardRepository {
             throw new RuntimeException(e);
         } finally {
             try {
-                if(oos != null) oos.close();
+                if (oos != null) oos.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -68,8 +67,8 @@ public class BoardRepository {
                             new FileInputStream("src/main/java/db/boardDB.dat")));
 
             /* 설명. 파일로부터 모든 회원 정보를 읽어 memberList에 추가(add) */
-            while(true) {
-                boardList.add((Board)(ois.readObject()));
+            while (true) {
+                boardList.add((Board) (ois.readObject()));
             }
 
         } catch (EOFException e) {
@@ -80,7 +79,7 @@ public class BoardRepository {
             throw new RuntimeException(e);
         } finally {
             try {
-                if(ois != null) ois.close();
+                if (ois != null) ois.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -92,8 +91,8 @@ public class BoardRepository {
     }
 
     public Board selectMember(int memNo) {
-        for(Board b: boardList) {
-            if(b.getBoardNo() == memNo) return b;
+        for (Board b : boardList) {
+            if (b.getBoardNo() == memNo) return b;
         }
         return null;
     }
@@ -125,7 +124,7 @@ public class BoardRepository {
             throw new RuntimeException(e);
         } finally {
             try {
-                if(moo != null) moo.close();
+                if (moo != null) moo.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -133,9 +132,9 @@ public class BoardRepository {
         return 1;
     }
 
-    public int deleteBoard(int boardNo) {
+    public int deleteBoard(int boardNo, String Member, String YN) {
         for (int i = 0; i < boardList.size(); i++) {
-            if(boardList.get(i).getBoardNo() == boardNo) {     // 지울려는 회원과 같은 회원 번호인 index 찾기
+            if (boardList.get(i).getBoardNo() == boardNo && boardList.get(i).getId().equals(Member) && YN.equals("Y")) {     // 지울려는 회원과 같은 회원 번호인 index 찾기
 
                 /* 설명. 프로그램 상에서 회원을 관리하는 memberList 뿐 아니라 DB(회원 파일)도 같이 적용되게 함 */
                 boardList.remove(i);
@@ -147,12 +146,12 @@ public class BoardRepository {
     }
 
     public ArrayList<Board> searchContent(String input) {
-         ArrayList<Board> searchingContent = new ArrayList<>();
-         for(int i=0; i<boardList.size();i++){
-             if(boardList.get(i).getContent().contains(input)) {
-                 searchingContent.add(boardList.get(i));
-             }
-         }
-         return searchingContent;
+        ArrayList<Board> searchingContent = new ArrayList<>();
+        for (int i = 0; i < boardList.size(); i++) {
+            if (boardList.get(i).getContent().contains(input)) {
+                searchingContent.add(boardList.get(i));
+            }
+        }
+        return searchingContent;
     }
 }

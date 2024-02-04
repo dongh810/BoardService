@@ -28,7 +28,7 @@ public class Application {
                     System.out.println("9. 뒤로가기");
                     System.out.print("조회할 분류를 선택해 주세요: ");
                     int input1 = sc.nextInt();
-                    switch (input1){
+                    switch (input1) {
                         case 1:
                             bs.selectAllBoards();
                             break;
@@ -39,8 +39,8 @@ public class Application {
                             System.out.print("검색할 내용을 입력해주세요: ");
                             sc.nextLine();
                             String searchInput = sc.nextLine();
-                            while(true){
-                                if(searchInput != null) {
+                            while (true) {
+                                if (searchInput != null) {
                                     bs.searchContent(searchInput);
                                     break;
                                 } else break;
@@ -56,9 +56,9 @@ public class Application {
 //                case 2:
 //                    bs.selectMember(chooseBoardNo());
 //                    break;
-//                case 3:
-//                    bs.registMember(signUp());
-//                    break;
+                case 3:
+                    bs.deleteBoard(chooseBoardNo(), chooseMember(), deleteYN());
+                    break;
 //                case 4:
 //                    bs.deleteMember(chooseMemberNo());
 //                    break;
@@ -73,7 +73,20 @@ public class Application {
 
     private static int chooseBoardNo() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("회원번호를 입력하세요: ");
+        System.out.print("게시글 번호를 입력하세요: ");
         return sc.nextInt();
+    }
+
+    private static String deleteYN() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("삭제하려면 'Y'를 입력하세요: ");
+
+        return sc.nextLine().toUpperCase();
+    }
+
+    private static String chooseMember() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("작성자 아이디를 입력하세요:");
+        return sc.nextLine();
     }
 }
