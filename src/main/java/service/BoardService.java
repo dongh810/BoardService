@@ -1,16 +1,19 @@
 package service;
 
 import aggregate.Board;
+import aggregate.CategoryType;
 import repository.BoardRepository;
 
-import java.lang.reflect.Member;
+import java.util.List;
 import java.util.ArrayList;
 
 public class BoardService {
+    private List<Board> boards;
 
     private final BoardRepository br = new BoardRepository();
 
     public BoardService() {
+        this.boards = br.selectAllBoard();
     }
 
     public void selectAllBoards() {
@@ -58,5 +61,35 @@ public class BoardService {
         if (result == 1) {
             System.out.println(board.getBoardNo() + "번째 게시물이 작성되었습니다.");
         }
+    }
+
+    public void searchByCategory(CategoryType categoryType) {
+        List<Board> result = new ArrayList<>();
+
+        System.out.println("카테고리 검색 시작. 선택한 카테고리: " + categoryType);
+
+        for (Board board : boards) {
+            if (board.getCategoryType() == categoryType) {
+                result.add(board);
+            }
+        }
+
+        if (result.isEmpty()) {
+            System.out.println("선택한 카테고리에 해당하는 게시글이 없습니다.");
+        } else {
+            for (Board board : result) {
+                displayBoardInfo(board);
+            }
+        }
+    }
+
+    private void displayBoardInfo(Board board) {
+        System.out.println("게시글 번호: " + board.getBoardNo());
+        System.out.println("작성자: " + board.getId());
+        System.out.println("제목: " + board.getTitle());
+        System.out.println("내용: " + board.getContent());
+        System.out.println("작성날짜: " + board.getDate());
+        System.out.println("카테고리: " + board.getCategoryType());
+        System.out.println("-----------------------------");
     }
 }

@@ -35,7 +35,11 @@ public class Application {
                             bs.selectAllBoards();
                             break;
                         case 2:
-                            bs.registBoard(writeContent());
+                            displayCategoryOptions();
+                            System.out.print("카테고리를 선택해 주세요: ");
+                            int categoryInput = sc.nextInt();
+                            CategoryType selectedCategory = getCategoryType(categoryInput);
+                            bs.searchByCategory(selectedCategory);
                             break;
                         case 3:
                             System.out.print("검색할 내용을 입력해주세요: ");
@@ -120,6 +124,32 @@ public class Application {
         System.out.print("게시글 번호를 입력하세요: ");
         return sc.nextInt();
     }
+
+    private static void displayCategoryOptions() {
+        System.out.println("1. FREE");
+        System.out.println("2. SHARE");
+        System.out.println("3. INTRO");
+        System.out.println("4. REVIEW");
+        System.out.println("5. QNA");
+    }
+
+    private static CategoryType getCategoryType(int input) {
+        switch (input) {
+            case 1:
+                return CategoryType.FREE;
+            case 2:
+                return CategoryType.SHARE;
+            case 3:
+                return CategoryType.INTRO;
+            case 4:
+                return CategoryType.REVIEW;
+            case 5:
+                return CategoryType.QNA;
+            default:
+                throw new IllegalArgumentException("유효하지 않은 카테고리 입력");
+        }
+    }
+
 
     private static String deleteYN() {
         Scanner sc = new Scanner(System.in);
