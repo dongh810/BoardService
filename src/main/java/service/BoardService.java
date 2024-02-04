@@ -46,9 +46,13 @@ public class BoardService {
 
     public void deleteBoard(int boardNo, String Member, String YN) {
         int result = br.deleteBoard(boardNo, Member, YN);
-        if (result > 0) {
+        if (result == 1) {
             System.out.println(boardNo + "번 게시물 삭제를 성공하였습니다.");
             return;
+        } else if (result == 2) {
+            System.out.println("회원 아이디가 일치하지 않습니다.");
+        } else if (result == 3) {
+            System.out.println("입력이 잘못되었습니다.");
         }
         System.out.println("게시물 삭제에 실패하였습니다.");
     }

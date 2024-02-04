@@ -141,6 +141,10 @@ public class BoardRepository {
                 boardList.remove(i);
                 saveBoards(boardList);
                 return 1;
+            } else if (boardList.get(i).getBoardNo() == boardNo && !boardList.get(i).getId().equals(Member) && YN.equals("Y")) {
+                return 2;
+            } else if (boardList.get(i).getBoardNo() == boardNo && boardList.get(i).getId().equals(Member) && !YN.equals("Y")) {
+                return 3;
             }
         }
         return 0;
