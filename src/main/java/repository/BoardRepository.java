@@ -124,7 +124,7 @@ public class BoardRepository {
             throw new RuntimeException(e);
         } finally {
             try {
-                if (moo != null) moo.close();
+                if(moo != null) moo.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

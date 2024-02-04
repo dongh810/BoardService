@@ -1,5 +1,7 @@
 package run;
 
+import aggregate.Board;
+import aggregate.CategoryType;
 import service.BoardService;
 
 import java.util.Scanner;
@@ -33,7 +35,7 @@ public class Application {
                             bs.selectAllBoards();
                             break;
                         case 2:
-                            //서비스
+                            bs.registBoard(writeContent());
                             break;
                         case 3:
                             System.out.print("검색할 내용을 입력해주세요: ");
@@ -53,9 +55,9 @@ public class Application {
                             System.out.println("번호를 제대로 다시 입력해 주세요");
                     }
                     break;
-//                case 2:
-//                    bs.selectMember(chooseBoardNo());
-//                    break;
+                case 2:
+                    bs.registBoard(writeContent());
+                    break;
                 case 3:
                     bs.deleteBoard(chooseBoardNo(), chooseMember(), deleteYN());
                     break;
@@ -69,6 +71,48 @@ public class Application {
                     System.out.println("번호를 제대로 다시 입력해 주세요");
             }
         }
+    }
+
+    public static Board writeContent() {
+
+        Board newInfo = null;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("ID를 입력하세요: ");
+        String id = sc.nextLine();
+
+        System.out.print("게시물 제목을 입력하세요: ");
+        String title = sc.nextLine();
+
+        System.out.print("게시물 내용을 입력하세요: ");
+        String content = sc.nextLine();
+
+        newInfo = new Board(id, title, content);
+
+        System.out.print("게시판 종류를 입력하세요: ");
+        String categoryType = sc.next().toUpperCase();
+        CategoryType ct = null;
+        switch (categoryType) {
+            case "Free":
+                ct = CategoryType.FREE;
+                break;
+            case "Share":
+                ct = CategoryType.SHARE;
+                break;
+            case "Into":
+                ct = CategoryType.INTRO;
+                break;
+            case "Review":
+                ct = CategoryType.REVIEW;
+                break;
+            case "QNA":
+                ct = CategoryType.QNA;
+                break;
+        }
+
+        newInfo.setCategoryType(ct);
+
+        return newInfo;
     }
 
     private static int chooseBoardNo() {

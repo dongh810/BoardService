@@ -46,6 +46,16 @@ public class Board implements Serializable {
         this.categoryType = categoryType;
     }
 
+    public Board(String id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
+
+    public void setBoardNo(int boardNo) {
+        this.boardNo = boardNo;
+    }
+
     @Override
     public String toString() {
         return "Board{" +
@@ -56,5 +66,9 @@ public class Board implements Serializable {
                 ", title='" + title + '\'' +
                 ", categoryType=" + categoryType +
                 '}';
+    }
+
+    public void setCategoryType(CategoryType categoryType) {
+        this.categoryType = categoryType;
     }
 }

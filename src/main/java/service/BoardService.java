@@ -49,4 +49,14 @@ public class BoardService {
         }
         System.out.println("게시물 삭제에 실패하였습니다.");
     }
+
+    public void registBoard(Board board) {
+        int lastBoardNo = br.selectLastBoardNo();
+        board.setBoardNo(lastBoardNo + 1);
+
+        int result = br.registBoard(board);
+        if (result == 1) {
+            System.out.println(board.getBoardNo() + "번째 게시물이 작성되었습니다.");
+        }
+    }
 }
