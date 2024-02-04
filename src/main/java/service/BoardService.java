@@ -22,8 +22,10 @@ public class BoardService {
         /* 설명. 회원이 한명도 없어서 조회 결과가 없더라도 ArrayList객체는 넘어온다.(Empty상태로) */
         if (!selectedBoards.isEmpty()) {        // 회원이 한명이라도 조회 된다면
             System.out.println("==== service까지 잘 반환되어 오나 확인 ====");
-            for (Board b : selectedBoards) {
-                System.out.println(b);
+            int boardNo = 0;
+            while (selectedBoards.size() > boardNo) {
+                System.out.println(selectedBoards.get(boardNo));
+                boardNo++;
             }
 
             return;                             // 이후 코드와 상관 없이 메소드 종료
